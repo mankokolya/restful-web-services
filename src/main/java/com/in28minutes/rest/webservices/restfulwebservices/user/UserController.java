@@ -27,7 +27,7 @@ public class UserController {
     public EntityModel<User> retrieveUser(@PathVariable int id) {
         User user = userDaoService.findOne(id);
         if (user == null) {
-            throw new UserNotFoundExceptionPresent("id-" + id);
+            throw new UserNotFoundException("id-" + id);
         }
         EntityModel<User> model = EntityModel.of(user);
         WebMvcLinkBuilder linkToUsers = linkTo(methodOn(this.getClass()).retrieveAllUsers());
@@ -39,7 +39,7 @@ public class UserController {
     public void deleteUser(@PathVariable int id) {
         User user = userDaoService.deleteById(id);
         if (user == null) {
-            throw new UserNotFoundExceptionPresent("id-" + id);
+            throw new UserNotFoundException("id-" + id);
         }
     }
 
